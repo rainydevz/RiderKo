@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Rider Ko Delivery</title>
+
+<link rel="stylesheet" href="style.css">
+
+
+<!-- GOOGLE FONT -->
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+
+<!-- FONT AWESOME -->
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<!-- QR CODE LIBRARY -->
+
+<script
+src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+
+<!-- GOOGLE MAPS -->
+
+<script
+    async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEQv5UNunSx3NInTwjf2GtSRLyKyxm6Lc&libraries=geometry&loading=async">
+</script>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+<header>
+
+    <h1>
+        🏍 RIDER KO
+    </h1>
+
+    <p>
+        FAST • SAFE • ON TIME
+    </p>
+
+    <!-- MENU BAR -->
+    <nav class="menu-bar">
+
+        <button onclick="showPage('dashboardPage')">
+            🏠 Home
+        </button>
+
+        <button onclick="showFeatures()">
+            ⭐ Features
+        </button>
+
+        <button onclick="showAbout()">
+            ℹ️ About
+        </button>
+
+        <button onclick="showContact()">
+            📞 Contact
+        </button>
+
+        <button onclick="showTrackingPage()">
+            📍 Track Rider
+        </button>
+
+        <button onclick="logout()" class="menu-logout">
+            🚪 Logout
+        </button>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ================================================= -->
+<!-- LOGIN PAGE -->
+<!-- ================================================= -->
+
+<div id="loginPage" class="page active">
+
+    <div class="card">
+
+        <div class="login-logo">
+            🏍
+        </div>
+
+        <h2>
+            Rider Ko
+        </h2>
+
+        <p class="login-subtitle">
+            Login to book a Rider
+        </p>
+
+
+        <input
+            id="username"
+            type="text"
+            placeholder="Username"
+        >
+
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Password"
+        >
+
+
+        <button onclick="login()">
+
+            🔐 Login
+
+        </button>
+
+
+        <p id="error"></p>
+
+
+        <p style="
+            text-align:center;
+            margin-top:20px;
+            color:#777;
+        ">
+
+            Demo Account:
+
+            <br>
+
+            <strong>
+                Admin / 1234
+            </strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- DASHBOARD -->
+<!-- ================================================= -->
+
+<div id="dashboardPage" class="page">
+
+    <div class="dashboard">
+
+
+        <div class="welcome-box">
+
+            <h2>
+
+                👋 Welcome,
+
+                <span id="loggedUser">
+                    Guest
+                </span>
+
+            </h2>
+
+            <p>
+                What can Rider Ko deliver for you today?
+            </p>
+
+        </div>
+
+
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <i class="fas fa-motorcycle"></i>
+
+                <h2>
+                    15+
+                </h2>
+
+                <p>
+                    Active Riders
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fas fa-truck-fast"></i>
+
+                <h2 id="orderCount">
+                    0
+                </h2>
+
+                <p>
+                    My Orders
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <i class="fas fa-location-dot"></i>
+
+                <h2>
+                    BULACAN
+                </h2>
+
+                <p>
+                    Service Area
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <h2 class="section-title">
+
+            What do you
+            <span>need?</span>
+
+        </h2>
+
+
+
+        <div class="service-grid">
+
+
+            <!-- PASABAY -->
+
+            <div
+                class="service-card"
+                onclick="selectService('Pasabay')"
+            >
+
+                <div class="service-icon">
+
+                    <i class="fas fa-motorcycle"></i>
+
+                </div>
+
+                <h3>
+                    Pasabay
+                </h3>
+
+                <p>
+                    Need something a ride?
+                    We'll do it for you.
+                </p>
+
+            </div>
+
+
+
+            <!-- RESTAURANT -->
+
+            <div
+                class="service-card"
+                onclick="selectService('Restaurant')"
+            >
+
+                <div class="service-icon">
+
+                    <i class="fas fa-utensils"></i>
+
+                </div>
+
+                <h3>
+                    Restaurant
+                </h3>
+
+                <p>
+                    Order food from your
+                    favorite restaurant.
+                </p>
+
+            </div>
+
+
+
+            <!-- GROCERY -->
+
+            <div
+                class="service-card"
+                onclick="selectService('Grocery')"
+            >
+
+                <div class="service-icon">
+
+                    <i class="fas fa-cart-shopping"></i>
+
+                </div>
+
+                <h3>
+                    Grocery
+                </h3>
+
+                <p>
+                    Groceries and essentials
+                    delivered to your door.
+                </p>
+
+            </div>
+
+
+
+            <!-- PARCEL -->
+
+            <div
+                class="service-card"
+                onclick="selectService('Parcel')"
+            >
+
+                <div class="service-icon">
+
+                    <i class="fas fa-box"></i>
+
+                </div>
+
+                <h3>
+                    Parcel
+                </h3>
+
+                <p>
+                    Send packages quickly
+                    and safely.
+                </p>
+
+            </div>
+
+
+
+            <!-- SHOPPING -->
+
+            <div
+                class="service-card"
+                onclick="selectService('Shopping')"
+            >
+
+                <div class="service-icon">
+
+                    <i class="fas fa-store"></i>
+
+                </div>
+
+                <h3>
+                    Shopping
+                </h3>
+
+                <p>
+                    Need something from a store? We'll buy it for you
+                </p>
+
+            </div>
+
+
+
+            <!-- SAME DAY -->
+
+            <div
+                class="service-card"
+                onclick="selectService('Same-Day Delivery')"
+            >
+
+                <div class="service-icon">
+
+                    <i class="fas fa-truck"></i>
+
+                </div>
+
+                <h3>
+                    Same-Day
+                </h3>
+
+                <p>
+                    Fast and reliable
+                    same-day delivery.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <br>
+
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+
+            🚪 Logout
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- RESTAURANT SELECTION -->
+<!-- ================================================= -->
+
+<div id="restaurantPage" class="page">
+
+    <div class="restaurant-card-container">
+
+
+        <div class="booking-icon"
+             style="text-align:center;">
+
+            🍔
+
+        </div>
+
+
+        <h2>
+            Choose Restaurant
+        </h2>
+
+
+        <p class="restaurant-subtitle">
+
+            Where would you like Rider Ko
+            to pick up your food?
+
+        </p>
+
+
+
+        <div class="restaurant-grid">
+
+
+            <!-- JOLLIBEE -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('Jollibee')"
+            >
+
+               <div class="restaurant-icon">
+    <img src="Jollibee.jpg" alt="Jollibee Logo">
+</div>
+
+                <h3>
+                    Jollibee
+                </h3>
+
+                <p>
+                    Chickenjoy • Burgers • Spaghetti
+                </p>
+
+            </div>
+
+
+
+            <!-- MANG INASAL -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('Mang Inasal')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="Mang Inasal.png" alt="Mang Inasal Logo">
+                </div>
+
+                <h3>
+                    Mang Inasal
+                </h3>
+
+                <p>
+                    Chicken • BBQ • Rice
+                </p>
+
+            </div>
+
+
+
+            <!-- CHOWKING -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('Chowking')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="Chowking.jpg" alt="Chowking Logo">
+                </div>
+
+                <h3>
+                    Chowking
+                </h3>
+
+                <p>
+                    Chinese Food • Siomai • Halo-Halo
+                </p>
+
+            </div>
+
+
+
+
+            <!-- KFC -->
+
+                <div
+                class="restaurant-card"
+                onclick="selectRestaurant('KFC')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="KFC.png" alt="KFC Logo">
+                </div>
+
+                <h3>
+                    KFC
+                </h3>
+
+                <p>
+                    Fried Chicken • Burgers • Meals
+                </p>
+
+            </div>
+
+
+
+            <!-- MCDONALDS -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('McDonalds')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="McDonalds.png" alt="McDonalds Logo">
+                </div>
+
+                <h3>
+                    McDonald's
+                </h3>
+
+                <p>
+                    Burgers • Fries • McChicken
+                </p>
+
+            </div>
+
+
+
+            <!-- BURGER KING -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('Burger King')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="Burger King.png" alt="Burger King Logo">
+                </div>
+
+                <h3>
+                    Burger King
+                </h3>
+
+                <p>
+                    Whopper • Burgers • Fries
+                </p>
+
+            </div>
+
+
+
+            <!-- GREENWICH -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('Greenwich')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="Greenwich.png" alt="Greenwich Logo">
+                </div>
+
+                <h3>
+                    Greenwich
+                </h3>
+
+                <p>
+                    Pizza • Pasta • Chicken
+                </p>
+
+            </div>
+
+
+
+            <!-- POPEYES -->
+
+            <div
+                class="restaurant-card"
+                onclick="selectRestaurant('Popeyes')"
+            >
+
+                <div class="restaurant-icon">
+                    <img src="Popeyes.png" alt="Popeyes Logo">
+                </div>
+
+                <h3>
+                    Popeyes
+                </h3>
+
+                <p>
+                    Chicken • Sandwiches • Meals
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <button
+            class="back-btn"
+            onclick="showPage('dashboardPage')"
+        >
+
+            ⬅ Back to Dashboard
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- BOOKING PAGE -->
+<!-- ================================================= -->
+
+<div id="bookingPage" class="page">
+
+
+    <div class="card booking-card">
+
+
+        <div class="booking-header">
+
+            <div class="booking-icon">
+
+                <i class="fas fa-motorcycle"></i>
+
+            </div>
+
+            <h2 id="serviceTitle">
+
+                Rider Ko Service
+
+            </h2>
+
+            <p>
+
+                Enter the details of your delivery.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- SELECTED RESTAURANT -->
+
+        <div
+            id="selectedRestaurantBox"
+            class="selected-restaurant"
+            style="display:none;"
+        >
+
+        </div>
+
+
+        <!-- ================================================= -->
+<!-- PICKUP LOCATION -->
+<!-- ================================================= -->
+
+<label>
+    Pickup Location
+</label>
+
+
+<!-- RESTAURANT PICKUP -->
+
+<select
+    id="restaurantPickup"
+    style="display:none;"
+    onchange="selectRestaurantPickup()"
+>
+
+    <option value="">
+        Choose Pickup Location
+    </option>
+
+</select>
+
+
+<!-- NORMAL PICKUP FOR OTHER SERVICES -->
+
+<input
+    id="pickup"
+    type="text"
+    placeholder="Example: Store, house, or pickup location"
+>
+
+
+
+
+        <!-- DELIVERY -->
+
+<label id="deliveryLabel">
+    Delivery Address
+</label>
+
+
+<!-- PROVINCE -->
+
+<select
+    id="deliveryProvince"
+    onchange="loadMunicipalities()"
+>
+
+    <option value="">
+         Choose Province / Area
+    </option>
+
+    <option value="Bulacan">
+        Bulacan
+    </option>
+
+    <option value="Pampanga">
+        Pampanga
+    </option>
+
+    <option value="Nueva Ecija">
+        Nueva Ecija
+    </option>
+
+    <option value="Laguna">
+        Laguna
+    </option>
+
+    <option value="Rizal">
+        Rizal
+    </option>
+
+    <option value="Baguio">
+        Baguio
+    </option>
+
+    <option value="Metro Manila">
+        Metro Manila
+    </option>
+
+</select>
+
+
+<!-- MUNICIPALITY -->
+
+<select
+    id="deliveryMunicipality"
+    onchange="updateDeliveryAddress()"
+    disabled
+>
+
+    <option value="">
+        
+         Choose Municipality / City
+    </option>
+
+</select>
+
+
+<!-- DELIVERY ADDRESS -->
+
+<input
+    id="delivery"
+    type="text"
+    placeholder="Selected location will appear here"
+    
+>
+
+
+
+
+        <!-- ================================================= -->
+<!-- RESTAURANT MENU -->
+<!-- ================================================= -->
+
+<div
+    id="restaurantMenuBox"
+    class="restaurant-menu-box"
+    style="display:none;"
+>
+
+    <h3>
+        🍔 Choose Your Order
+    </h3>
+
+    <p style="
+        color:#777;
+        font-size:13px;
+        margin-bottom:15px;
+    ">
+
+        Choose an item and quantity, then click
+        <strong>Add to Order</strong>.
+
+    </p>
+
+    <div id="restaurantMenu"></div>
+
+
+    <div
+        id="orderList"
+        class="order-list"
+    >
+
+    </div>
+
+</div>
+
+
+<!-- ITEM -->
+
+<label>
+    Item / Order
+</label>
+
+<input
+    id="item"
+    type="text"
+    placeholder="Example: Item or order details"
+    
+>
+
+
+
+
+
+        <!-- ORDER AMOUNT -->
+
+        <label>
+            Order Amount (₱)
+        </label>
+
+        <input
+            id="orderAmount"
+            type="number"
+            min="0"
+            step="0.01"
+            value="0"
+            placeholder="Example: 250"
+            oninput="calculateTotal()"
+        >
+
+
+        <p style="
+            color:#777;
+            font-size:12px;
+            margin-top:-5px;
+        ">
+
+            Enter the estimated price of your items.
+            You can put 0 if not applicable.
+
+        </p>
+
+
+
+        <!-- CONTACT -->
+
+        <label>
+            Contact Number
+        </label>
+
+        <input
+            id="contact"
+            type="text"
+            placeholder="09XXXXXXXXX"
+        >
+
+
+
+        <!-- INSTRUCTIONS -->
+
+        <label>
+            Additional Instructions
+        </label>
+
+        <textarea
+            id="instructions"
+            rows="4"
+            placeholder="Optional instructions..."
+        ></textarea>
+
+
+
+        <!-- PAYMENT -->
+
+        <div class="payment-section">
+
+            <h3>
+                💳 Payment Method
+            </h3>
+
+
+            <div class="payment-options">
+
+
+                <div
+                    id="qrPaymentOption"
+                    class="payment-option"
+                    onclick="selectPayment('QR Payment')"
+                >
+
+                    <i class="fas fa-qrcode"></i>
+
+                    QR Payment
+
+                </div>
+
+
+                <div
+                    id="codPaymentOption"
+                    class="payment-option"
+                    onclick="selectPayment('Cash / COD')"
+                >
+
+                    <i class="fas fa-money-bill-wave"></i>
+
+                    Cash / COD
+
+                </div>
+
+
+            </div>
+
+
+            <p class="payment-note">
+
+                Choose how you want to pay for
+                your Rider Ko delivery.
+
+            </p>
+
+        </div>
+
+
+
+        <!-- TOTAL -->
+
+        <div class="total-box">
+
+            <div class="total-row">
+
+                <span>
+                    Order Amount
+                </span>
+
+                <strong id="displayOrderAmount">
+                    ₱0.00
+                </strong>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    Delivery Fee
+                </span>
+
+                <strong>
+                    ₱50.00
+                </strong>
+
+            </div>
+
+
+            <div class="total-row total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="displayTotal">
+                    ₱50.00
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <button onclick="previewOrder()">
+
+            Continue ➡
+
+        </button>
+
+
+
+        <button
+            class="back-btn"
+            onclick="backFromBooking()"
+        >
+
+            ⬅ Back
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- ORDER PREVIEW -->
+<!-- ================================================= -->
+
+<div id="previewPage" class="page">
+
+
+    <div class="card">
+
+
+        <h2>
+            📋 Order Preview
+        </h2>
+
+
+        <p style="
+            text-align:center;
+            color:#777;
+            margin-bottom:20px;
+        ">
+
+            Please check your order details.
+
+        </p>
+
+
+
+        <div
+            id="previewInfo"
+            class="preview-box"
+        >
+
+        </div>
+
+
+
+        <button onclick="confirmOrder()">
+
+            ✅ Confirm Booking
+
+        </button>
+
+
+
+        <button
+            class="back-btn"
+            onclick="showPage('bookingPage')"
+        >
+
+            ⬅ Edit Order
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- QR PAYMENT PAGE -->
+<!-- ================================================= -->
+
+<div id="qrPaymentPage" class="page">
+
+
+    <div class="card qr-card">
+
+
+        <div class="booking-icon">
+
+            <i class="fas fa-qrcode"></i>
+
+        </div>
+
+
+        <h2 class="qr-title">
+
+            QR Payment
+
+        </h2>
+
+
+        <p class="qr-subtitle">
+
+            Scan the QR code using your
+            GCash or supported QR scanner.
+
+        </p>
+
+
+
+        <div class="qr-container">
+
+            <div id="qrcode"></div>
+
+        </div>
+
+
+
+        <!-- PAYMENT ACCOUNT -->
+
+        <div class="gcash-info">
+
+            <strong>
+                GCash Payment
+            </strong>
+
+            <br><br>
+
+            Account Name:
+            <strong>
+                Rider Ko
+            </strong>
+
+            <br>
+
+            GCash Number:
+            <strong>
+                0912-345-6789
+            </strong>
+
+            <br><br>
+
+            Amount:
+
+            <strong id="qrAmount">
+                ₱50.00
+            </strong>
+
+        </div>
+
+
+
+        <div
+            id="qrReference"
+            class="qr-reference"
+        >
+
+        </div>
+
+
+
+        <p style="
+            color:#777;
+            font-size:12px;
+            margin-top:15px;
+        ">
+
+            ⚠️ Demo payment screen.
+            Replace the GCash details and QR
+            configuration with your real payment
+            information before using this for
+            actual transactions.
+
+        </p>
+
+
+
+        <button onclick="finishQRPayment()">
+
+            ✅ I Have Completed Payment
+
+        </button>
+
+
+
+        <button
+            class="back-btn"
+            onclick="showPage('previewPage')"
+        >
+
+            ⬅ Back
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- COD CONFIRMATION PAGE -->
+<!-- ================================================= -->
+
+<div id="codPage" class="page">
+
+
+    <div class="card success-card">
+
+
+        <div class="cod-box">
+
+            <i class="fas fa-money-bill-wave"></i>
+
+            <h3>
+                Cash / COD Selected
+            </h3>
+
+            <p>
+
+                Please prepare the exact amount
+                or enough cash for the rider.
+
+            </p>
+
+        </div>
+
+
+        <h2>
+            Confirm Cash Payment
+        </h2>
+
+
+        <p style="
+            color:#777;
+            margin-bottom:20px;
+        ">
+
+            Your payment will be collected
+            by the rider upon delivery.
+
+        </p>
+
+
+
+        <div
+            id="codSummary"
+            class="preview-box"
+            style="text-align:left;"
+        >
+
+        </div>
+
+
+
+        <button onclick="finishCODPayment()">
+
+            ✅ Confirm Cash / COD
+
+        </button>
+
+
+
+        <button
+            class="back-btn"
+            onclick="showPage('previewPage')"
+        >
+
+            ⬅ Back
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- SUCCESS PAGE -->
+<!-- ================================================= -->
+
+<div id="successPage" class="page">
+
+
+    <div class="card success-card">
+
+
+        <div class="success-icon">
+
+            <i class="fas fa-circle-check"></i>
+
+        </div>
+
+
+        <h2>
+
+            Rider Booked!
+
+        </h2>
+
+
+        <p>
+
+            Your delivery request has been
+            successfully created.
+
+        </p>
+
+
+
+        <div
+            id="referenceNumber"
+            class="reference"
+        >
+
+        </div>
+
+
+
+        <div
+            id="successPaymentInfo"
+            class="preview-box"
+            style="text-align:left;"
+        >
+
+        </div>
+
+
+
+        <p>
+
+            A Rider Ko rider will handle
+            your delivery.
+
+        </p>
+
+
+        <!-- TRACK RIDER BUTTON -->
+
+        <button onclick="showTrackingPage()">
+
+            📍 Track My Rider
+
+        </button>
+
+
+
+        <button onclick="showPage('dashboardPage')">
+
+            🏠 Back to Dashboard
+
+        </button>
+
+
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+
+            🚪 Logout
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- LIVE TRACKING PAGE -->
+<!-- ================================================= -->
+
+<div id="trackingPage" class="page">
+
+
+    <div class="card tracking-card">
+
+
+        <div class="booking-icon">
+
+            <i class="fas fa-location-dot"></i>
+
+        </div>
+
+
+        <h2>
+
+            Live Rider Tracking
+
+        </h2>
+
+
+        <p
+            id="trackingStatus"
+            style="
+                text-align:center;
+                color:#777;
+                margin-bottom:15px;
+            "
+        >
+
+            🟢 Rider is on the way
+
+        </p>
+
+
+
+        <!-- GOOGLE MAP -->
+
+        <div id="map"></div>
+
+
+
+        <!-- TRACKING INFORMATION -->
+
+        <div class="tracking-info">
+
+
+            <div>
+
+                <strong>
+
+                    🏍 Rider
+
+                </strong>
+
+                <span id="riderName">
+
+                    Rider Ko
+
+                </span>
+
+            </div>
+
+
+
+            <div>
+
+                <strong>
+
+                    📏 Distance
+
+                </strong>
+
+                <span id="distance">
+
+                    Calculating...
+
+                </span>
+
+            </div>
+
+
+
+            <div>
+
+                <strong>
+
+                    ⏱ ETA
+
+                </strong>
+
+                <span id="eta">
+
+                    Calculating...
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BOOKING INFORMATION -->
+
+        <div
+            class="preview-box"
+            style="text-align:left;"
+        >
+
+
+            <strong>
+
+                Booking Reference
+
+            </strong>
+
+            <br>
+
+
+            <span id="trackingReference">
+
+                -
+
+            </span>
+
+
+            <br><br>
+
+
+
+            <strong>
+
+                Delivery Status
+
+            </strong>
+
+            <br>
+
+
+            <span id="deliveryStatus">
+
+                🏍 Rider is on the way
+
+            </span>
+
+
+        </div>
+
+
+
+        <!-- GET CUSTOMER LOCATION -->
+
+        <button onclick="startCustomerTracking()">
+
+            📍 Use My Current Location
+
+        </button>
+
+
+
+        <!-- BACK BUTTON -->
+
+        <button
+            class="back-btn"
+            onclick="showPage('successPage')"
+        >
+
+            ⬅ Back
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<footer>
+
+    <strong>
+        RIDER KO
+    </strong>
+
+    <br>
+
+    We deliver what matters most.
+
+    <br><br>
+
+    © 2026 Rider Ko Delivery
+
+</footer>
+
+
+<script src="script.js"></script>
+</body>
+</html>
